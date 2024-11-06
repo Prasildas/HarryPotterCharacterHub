@@ -13,9 +13,11 @@
     <string name="ravenclaw">Ravenclaw</string>
     <string name="hufflepuff">Hufflepuff</string>
     <string name="played_by">Played by</string>
+    <string name="species">Species</string>
 
     <string name="search_label">Search by name or actor</string>
     <string name="no_characters_found">No characters found.</string>
+    <string name="retry">Retry or Refresh</string>
 
 
     <string name="unknown">Unknown</string>

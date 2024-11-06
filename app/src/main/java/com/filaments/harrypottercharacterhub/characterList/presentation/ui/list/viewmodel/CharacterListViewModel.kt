@@ -76,7 +76,6 @@ class CharacterListViewModel @Inject constructor(
         }
     }
 
-    // Optional: Refresh function
     fun refreshCharacterList() {
         getCharacterList(forceFetchFromRemote = true)
     }
@@ -88,11 +87,4 @@ class CharacterListViewModel @Inject constructor(
     fun clearToastMessage() {
         _toastMessage.value = null
     }
-
-    override fun onCleared() {
-        super.onCleared()
-        // Optional: Consider what state you really want to reset
-        // _characterListState.value = CharacterListState() // Uncomment if you need to reset the state
-    }
 }
-

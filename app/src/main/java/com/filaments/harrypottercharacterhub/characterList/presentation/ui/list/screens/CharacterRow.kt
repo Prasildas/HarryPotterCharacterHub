@@ -50,7 +50,10 @@ fun CharacterRow(character: Character, onClick: () -> Unit) {
 
             // Character details
             Column {
-                Text(text = character.name, style = MaterialTheme.typography.bodyLarge)
+                Text(
+                    text = character.name,
+                    style = MaterialTheme.typography.bodyLarge
+                )
                 Text(
                     text = buildString {
                         append(stringResource(id = R.string.played_by))
@@ -59,21 +62,14 @@ fun CharacterRow(character: Character, onClick: () -> Unit) {
                     },
                     style = MaterialTheme.typography.bodyMedium
                 )
-                character.house?.let {
-                    Text(
-                        text = "${stringResource(id = R.string.house_label)}: ${
-                            stringResource(
-                                id = when (it) {
-                                    "Gryffindor" -> R.string.gryffindor
-                                    "Slytherin" -> R.string.slytherin
-                                    "Ravenclaw" -> R.string.ravenclaw
-                                    "Hufflepuff" -> R.string.hufflepuff
-                                    else -> R.string.unknown_actor
-                                }
-                            )
-                        }", style = MaterialTheme.typography.bodySmall
-                    )
-                }
+                Text(
+                    text = buildString {
+                        append(stringResource(id = R.string.species))
+                        append(": ")
+                        append(character.species)
+                    },
+                    style = MaterialTheme.typography.bodySmall
+                )
             }
         }
     }
@@ -85,8 +81,7 @@ fun HouseIndicator(house: String?) {
         modifier = Modifier
             .size(16.dp)
             .background(
-                color = getHouseColor(house),
-                shape = CircleShape
+                color = getHouseColor(house), shape = CircleShape
             )
     )
 }

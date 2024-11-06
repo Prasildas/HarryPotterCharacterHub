@@ -1,12 +1,14 @@
 package com.filaments.harrypottercharacterhub.characterList.data.remote.model
 
+import com.google.gson.annotations.SerializedName
+
 data class CharacterDto(
-    val actor: String,
-    val alive: Boolean,
-    val dateOfBirth: String?,
-    val house: String?,
-    val id: String,
-    val image: String?,
-    val name: String,
-    val species: String?
+    @SerializedName("actor") val actor: String,
+    @SerializedName("alive") val alive: Boolean,
+    @SerializedName("date_of_birth") val dateOfBirth: String?,
+    @SerializedName("house") val house: String?,
+    @SerializedName("id") val id: String,
+    @SerializedName("image") val image: String?,
+    @SerializedName("name") val name: String,
+    @SerializedName("species") val species: String?
 )

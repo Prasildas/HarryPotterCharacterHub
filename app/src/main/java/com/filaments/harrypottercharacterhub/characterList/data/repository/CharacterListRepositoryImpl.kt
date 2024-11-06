@@ -20,42 +20,44 @@ import javax.inject.Inject
 class CharacterListRepositoryImpl @Inject constructor(
     private val harryPotterApiService: HarryPotterApiService,
     private val appDatabase: AppDatabase,
-    private val stringProvider: StringProvider // Inject the StringProvider
+    private val stringProvider: StringProvider
 ) : CharacterListRepository {
 
     override suspend fun getCharacterList(forceFetchRemote: Boolean): Flow<Resource<List<Character>>> =
         flow {
-            emit(Resource.Loading()) // Indicate that loading has started
+            emit(Resource.Loading())
 
-            // Retrieve local data
             val localCharacterList = appDatabase.characterDao.getAllCharacters()
 
-            // Emit local data if available and if not forced to fetch from remote
             if (localCharacterList.isNotEmpty() && !forceFetchRemote) {
                 emit(Resource.Success(data = localCharacterList.map { it.toCharacter() }))
-                return@flow // Return early if local data is available
+                return@flow
             }
 
-            // Fetch remote data if local data is unavailable or forced to refresh
             val characterListFromApi = try {
                 harryPotterApiService.getCharacters()
             } catch (e: IOException) {
-                emit(Resource.Error(stringProvider.networkError())) // Use StringProvider for error message
-                return@flow // Return early after handling error
+                emit(Resource.Error(stringProvider.networkError()))
+                return@flow
             } catch (e: HttpException) {
-                emit(Resource.Error(stringProvider.serverError())) // Use StringProvider for error message
-                return@flow // Return early after handling error
+                emit(Resource.Error(stringProvider.serverError()))
+                return@flow
             } catch (e: Exception) {
-                emit(Resource.Error(stringProvider.unknownError())) // Use StringProvider for error message
-                return@flow // Return early after handling error
+                emit(Resource.Error(stringProvider.unknownError()))
+                return@flow
             }
 
-            // Update database with new data from the API
             val characterEntities = characterListFromApi.map { it.toCharacterEntity() }
-            appDatabase.characterDao.upsertCharactersList(characterEntities)
+
+            // Check if the new data differs from the existing local data
+            val localCharacters = localCharacterList.map { it.toCharacter() }
+            if (characterEntities.map { it.toCharacter() } != localCharacters) {
+                appDatabase.characterDao.upsertCharactersList(characterEntities)
+            }
 
             // Emit the updated list from the remote source
             emit(Resource.Success(data = characterEntities.map { it.toCharacter() }))
         }
 }
+
 

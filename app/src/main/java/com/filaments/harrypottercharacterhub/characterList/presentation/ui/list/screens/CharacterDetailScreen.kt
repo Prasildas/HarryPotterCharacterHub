@@ -16,7 +16,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.filaments.harrypottercharacterhub.R
@@ -43,12 +43,11 @@ fun CharacterDetailScreen(character: Character, viewModel: CharacterListViewMode
     val context = LocalContext.current
 
     // Observe the toast message state
-    val toastMessage by viewModel.toastMessage.collectAsState()
+    val toastMessage by viewModel.toastMessage.collectAsStateWithLifecycle()
 
-    // Show the toast if there's a message
     toastMessage?.let {
         Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-        viewModel.clearToastMessage() // Clear the toast message after showing
+        viewModel.clearToastMessage()
     }
 
     Scaffold(
@@ -81,8 +80,8 @@ fun CharacterImage(imageUrl: String?, characterName: String, viewModel: Characte
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(
-                        Color(0xFF123456), // Adjust the gradient colors as needed
-                        Color(0xFF654321)
+                        MaterialTheme.colorScheme.primary,
+                        MaterialTheme.colorScheme.secondary
                     )
                 )
             )
@@ -94,8 +93,8 @@ fun CharacterImage(imageUrl: String?, characterName: String, viewModel: Characte
             model = ImageRequest.Builder(context)
                 .data(imageUrl.takeIf { !it.isNullOrEmpty() } ?: R.drawable.placeholder)
                 .crossfade(true)
-                .error(R.drawable.placeholder) // Fallback if the image fails to load
-                .placeholder(R.drawable.placeholder) // Placeholder while loading
+                .error(R.drawable.placeholder)
+                .placeholder(R.drawable.placeholder)
                 .build(),
             contentDescription = stringResource(
                 id = R.string.character_image_description,
@@ -107,7 +106,7 @@ fun CharacterImage(imageUrl: String?, characterName: String, viewModel: Characte
                 .aspectRatio(16 / 9f)
                 .padding(8.dp),
             onError = {
-                viewModel.showToast(imageLoadErrorMessage) // Trigger the toast message from the ViewModel
+                viewModel.showToast(imageLoadErrorMessage)
             }
         )
     }

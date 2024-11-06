@@ -37,7 +37,6 @@ fun SearchableCharacterList(
     }
 
     Column {
-        // Search TextField
         TextField(
             value = searchText,
             onValueChange = { searchText = it },

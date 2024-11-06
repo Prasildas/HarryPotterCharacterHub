@@ -9,12 +9,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -59,13 +59,13 @@ class MainActivity : ComponentActivity() {
                 })
             }
             composable(
-                route = Screen.Details.route, // Use Screen.Details.route directly
+                route = Screen.Details.route,
                 arguments = listOf(navArgument("characterId") { type = NavType.StringType })
             ) { backStackEntry ->
                 val characterId = backStackEntry.arguments?.getString("characterId")
 
                 // Collect the character list state
-                val characterListState by viewModel.characterListState.collectAsState()
+                val characterListState by viewModel.characterListState.collectAsStateWithLifecycle()
 
                 // Find the character by ID
                 val character = characterListState.characterList.find { it.id == characterId }
