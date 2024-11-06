@@ -119,9 +119,9 @@ class CharacterListViewModelTest {
             cancelAndConsumeRemainingEvents()
         }
     }
+
     @Test
     fun `repository returns updated data`() = runTest {
-        // Arrange
         val newCharacter = CharacterDto(
             id = "1",
             name = "Harry Potter",
@@ -132,17 +132,19 @@ class CharacterListViewModelTest {
             species = "",
             image = ""
         )
+
         coEvery { repository.getCharacterList(true) } returns flow {
             emit(Resource.Loading())
             emit(Resource.Success(listOf(newCharacter.toCharacter())))
         }
 
-        // Act
-        val result = repository.getCharacterList(true).toList() // Collect the emitted items
+        val result = repository.getCharacterList(true).toList()
 
-        // Assert
-        assertTrue(result[0] is Resource.Loading) // Check for loading state
-        assertTrue(result[1] is Resource.Success) // Check for success state
-        assertEquals(listOf(newCharacter.toCharacter()), (result[1] as Resource.Success).data) // Check the character data
+        assertTrue(result[0] is Resource.Loading)
+
+        assertTrue(result[1] is Resource.Success)
+
+        val successData = (result[1] as Resource.Success).data
+        assertEquals(listOf(newCharacter.toCharacter()), successData)
     }
 }
