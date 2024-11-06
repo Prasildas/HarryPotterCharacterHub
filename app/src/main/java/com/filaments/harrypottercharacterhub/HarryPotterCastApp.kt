@@ -7,4 +7,4 @@ import dagger.hilt.android.HiltAndroidApp
  * Created by prasildas
  */
 @HiltAndroidApp
-class HappyPotterCastApp: Application()
+class HarryPotterCastApp: Application()

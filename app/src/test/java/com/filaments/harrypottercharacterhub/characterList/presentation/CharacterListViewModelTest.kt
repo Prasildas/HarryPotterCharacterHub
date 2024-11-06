@@ -1,6 +1,8 @@
 package com.filaments.harrypottercharacterhub.characterList.presentation
 
 import app.cash.turbine.test
+import com.filaments.harrypottercharacterhub.characterList.data.mappers.toCharacter
+import com.filaments.harrypottercharacterhub.characterList.data.remote.model.CharacterDto
 import com.filaments.harrypottercharacterhub.characterList.domain.model.Character
 import com.filaments.harrypottercharacterhub.characterList.domain.repository.CharacterListRepository
 import com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.state.CharacterListState
@@ -9,10 +11,12 @@ import com.filaments.harrypottercharacterhub.characterList.utils.Resource
 import com.filaments.harrypottercharacterhub.characterList.utils.StringProvider
 import io.mockk.coEvery
 import io.mockk.mockk
+import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
@@ -32,7 +36,6 @@ class CharacterListViewModelTest {
     private val repository = mockk<CharacterListRepository>()
     private lateinit var viewModel: CharacterListViewModel
     private val mockStringProvider = mockk<StringProvider>()
-
 
     private val mockCharacters = listOf(
         Character(
@@ -61,10 +64,9 @@ class CharacterListViewModelTest {
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
 
-        // Default mock setup with delay between loading and success
-        coEvery { repository.getCharacterList(any()) } returns flow {
+        coEvery { repository.getCharacterList(false) } returns flow {
             emit(Resource.Loading())
-            delay(50)  // Introduce a small delay
+            delay(50)
             emit(Resource.Success(mockCharacters))
         }
 
@@ -79,11 +81,9 @@ class CharacterListViewModelTest {
     @Test
     fun `getCharacterList emits loading and success states`() = runTest {
         viewModel.characterListState.test {
-            // Capture initial loading state
             val loadingState = awaitItem()
             assertEquals(CharacterListState(isLoading = true), loadingState)
 
-            // Capture success state with character data
             val successState = awaitItem()
             assertEquals(
                 CharacterListState(isLoading = false, characterList = mockCharacters),
@@ -98,22 +98,18 @@ class CharacterListViewModelTest {
     fun `getCharacterList emits loading and error states`() = runTest {
         val errorMessage = "Network Error"
 
-        // Override the repository to emit an error with a delay
         coEvery { repository.getCharacterList(any()) } returns flow {
             emit(Resource.Loading())
-            delay(50)  // Delay to allow state observation
+            delay(50)
             emit(Resource.Error(errorMessage))
         }
 
-        // Reinitialize ViewModel with updated mock behavior
         viewModel = CharacterListViewModel(repository, mockStringProvider)
 
         viewModel.characterListState.test {
-            // Capture initial loading state
             val loadingState = awaitItem()
             assertEquals(CharacterListState(isLoading = true), loadingState)
 
-            // Capture error state with error message
             val errorState = awaitItem()
             assertEquals(
                 CharacterListState(isLoading = false, errorMessage = errorMessage),
@@ -122,5 +118,31 @@ class CharacterListViewModelTest {
 
             cancelAndConsumeRemainingEvents()
         }
+    }
+    @Test
+    fun `repository returns updated data`() = runTest {
+        // Arrange
+        val newCharacter = CharacterDto(
+            id = "1",
+            name = "Harry Potter",
+            actor = "Daniel Radcliffe",
+            house = "Gryffindor",
+            dateOfBirth = "01-01-1991",
+            alive = true,
+            species = "",
+            image = ""
+        )
+        coEvery { repository.getCharacterList(true) } returns flow {
+            emit(Resource.Loading())
+            emit(Resource.Success(listOf(newCharacter.toCharacter())))
+        }
+
+        // Act
+        val result = repository.getCharacterList(true).toList() // Collect the emitted items
+
+        // Assert
+        assertTrue(result[0] is Resource.Loading) // Check for loading state
+        assertTrue(result[1] is Resource.Success) // Check for success state
+        assertEquals(listOf(newCharacter.toCharacter()), (result[1] as Resource.Success).data) // Check the character data
     }
 }

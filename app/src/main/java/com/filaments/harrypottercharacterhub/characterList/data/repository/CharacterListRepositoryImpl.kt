@@ -47,13 +47,9 @@ class CharacterListRepositoryImpl @Inject constructor(
                 return@flow
             }
 
+            // Update database with new data from the API
             val characterEntities = characterListFromApi.map { it.toCharacterEntity() }
-
-            // Check if the new data differs from the existing local data
-            val localCharacters = localCharacterList.map { it.toCharacter() }
-            if (characterEntities.map { it.toCharacter() } != localCharacters) {
-                appDatabase.characterDao.upsertCharactersList(characterEntities)
-            }
+            appDatabase.characterDao.upsertCharactersList(characterEntities)
 
             // Emit the updated list from the remote source
             emit(Resource.Success(data = characterEntities.map { it.toCharacter() }))

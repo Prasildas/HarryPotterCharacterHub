@@ -54,15 +54,24 @@ class CharacterListViewModel @Inject constructor(
                         is Resource.Loading -> {
                             _characterListState.update { it.copy(isLoading = true) }
                         }
+
                         is Resource.Success -> {
-                            _characterListState.update {
-                                it.copy(
-                                    isLoading = false,
-                                    characterList = result.data ?: emptyList(),
-                                    errorMessage = null
-                                )
+                            val newCharacters = result.data ?: emptyList()
+                            if (_characterListState.value.characterList != newCharacters) {
+                                _characterListState.update {
+                                    it.copy(
+                                        isLoading = false,
+                                        characterList = newCharacters,
+                                        errorMessage = null
+                                    )
+                                }
+                            } else {
+                                _characterListState.update {
+                                    it.copy(isLoading = false)
+                                }
                             }
                         }
+
                         is Resource.Error -> {
                             _characterListState.update {
                                 it.copy(

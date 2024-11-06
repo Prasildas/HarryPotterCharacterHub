@@ -33,3 +33,16 @@ fun CharacterEntity.toCharacter(): Character {
         id = id
     )
 }
+
+fun CharacterDto.toCharacter(): Character {
+    return Character(
+        id = id,
+        name = name,
+        actor = actor,
+        house = house,
+        dateOfBirth = dateOfBirth,
+        alive = alive,
+        species = species,
+        image = image
+    )
+}
