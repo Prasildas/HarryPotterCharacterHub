@@ -1,4 +1,4 @@
-package com.filaments.harrypottercharacterhub.characterList.common
+package com.filaments.harrypottercharacterhub.characterList.utils
 
 /**
  * Created by prasildas

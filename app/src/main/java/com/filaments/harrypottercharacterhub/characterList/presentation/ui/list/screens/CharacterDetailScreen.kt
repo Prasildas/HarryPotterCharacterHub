@@ -1,4 +1,4 @@
-package com.filaments.harrypottercharacterhub.characterList.presentation.ui
+package com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.screens
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -30,9 +30,9 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.filaments.harrypottercharacterhub.R
-import com.filaments.harrypottercharacterhub.characterList.common.DateUtils
 import com.filaments.harrypottercharacterhub.characterList.domain.model.Character
-import com.filaments.harrypottercharacterhub.characterList.presentation.CharacterListViewModel
+import com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.viewmodel.CharacterListViewModel
+import com.filaments.harrypottercharacterhub.characterList.utils.DateUtils
 
 /**
  * Created by prasildas

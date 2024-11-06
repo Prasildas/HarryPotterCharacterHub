@@ -1,10 +1,12 @@
 package com.filaments.harrypottercharacterhub.characterList.presentation
 
 import app.cash.turbine.test
-import com.filaments.harrypottercharacterhub.characterList.common.Resource
-import com.filaments.harrypottercharacterhub.characterList.common.StringProvider
 import com.filaments.harrypottercharacterhub.characterList.domain.model.Character
 import com.filaments.harrypottercharacterhub.characterList.domain.repository.CharacterListRepository
+import com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.state.CharacterListState
+import com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.viewmodel.CharacterListViewModel
+import com.filaments.harrypottercharacterhub.characterList.utils.Resource
+import com.filaments.harrypottercharacterhub.characterList.utils.StringProvider
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers

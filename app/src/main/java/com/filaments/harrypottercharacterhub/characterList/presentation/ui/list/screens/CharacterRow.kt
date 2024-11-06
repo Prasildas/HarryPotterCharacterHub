@@ -1,4 +1,4 @@
-package com.filaments.harrypottercharacterhub.characterList.presentation
+package com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,8 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.filaments.harrypottercharacterhub.R
-import com.filaments.harrypottercharacterhub.characterList.common.getHouseColor
 import com.filaments.harrypottercharacterhub.characterList.domain.model.Character
+import com.filaments.harrypottercharacterhub.characterList.utils.getHouseColor
 
 /**
  * Created by prasildas

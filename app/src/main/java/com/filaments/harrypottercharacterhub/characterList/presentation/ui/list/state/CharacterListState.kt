@@ -1,4 +1,4 @@
-package com.filaments.harrypottercharacterhub.characterList.presentation
+package com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.state
 
 import com.filaments.harrypottercharacterhub.characterList.domain.model.Character
 

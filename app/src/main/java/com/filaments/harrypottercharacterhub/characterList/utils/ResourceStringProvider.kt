@@ -1,4 +1,4 @@
-package com.filaments.harrypottercharacterhub.characterList.common
+package com.filaments.harrypottercharacterhub.characterList.utils
 
 import android.app.Application
 import com.filaments.harrypottercharacterhub.R

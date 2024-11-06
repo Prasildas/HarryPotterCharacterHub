@@ -1,4 +1,4 @@
-package com.filaments.harrypottercharacterhub.characterList.presentation.ui
+package com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.nav
 
 /**
  * Created by prasildas

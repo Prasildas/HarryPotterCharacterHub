@@ -1,7 +1,7 @@
 package com.filaments.harrypottercharacterhub.characterList.domain.repository
 
-import com.filaments.harrypottercharacterhub.characterList.common.Resource
 import com.filaments.harrypottercharacterhub.characterList.domain.model.Character
+import com.filaments.harrypottercharacterhub.characterList.utils.Resource
 import kotlinx.coroutines.flow.Flow
 
 /**

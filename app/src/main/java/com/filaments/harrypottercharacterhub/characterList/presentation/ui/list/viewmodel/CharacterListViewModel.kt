@@ -1,10 +1,11 @@
-package com.filaments.harrypottercharacterhub.characterList.presentation
+package com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.filaments.harrypottercharacterhub.characterList.common.Resource
-import com.filaments.harrypottercharacterhub.characterList.common.StringProvider
 import com.filaments.harrypottercharacterhub.characterList.domain.repository.CharacterListRepository
+import com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.state.CharacterListState
+import com.filaments.harrypottercharacterhub.characterList.utils.Resource
+import com.filaments.harrypottercharacterhub.characterList.utils.StringProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

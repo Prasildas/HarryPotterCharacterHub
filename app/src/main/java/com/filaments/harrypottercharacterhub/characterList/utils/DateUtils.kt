@@ -1,4 +1,4 @@
-package com.filaments.harrypottercharacterhub.characterList.common
+package com.filaments.harrypottercharacterhub.characterList.utils
 
 import java.text.SimpleDateFormat
 import java.util.Date

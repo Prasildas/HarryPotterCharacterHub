@@ -1,4 +1,4 @@
-package com.filaments.harrypottercharacterhub.characterList.presentation
+package com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

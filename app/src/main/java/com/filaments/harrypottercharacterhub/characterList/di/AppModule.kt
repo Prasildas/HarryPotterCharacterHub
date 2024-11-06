@@ -3,10 +3,10 @@ package com.filaments.harrypottercharacterhub.characterList.di
 import android.app.Application
 import androidx.room.Room
 import com.filaments.harrypottercharacterhub.BuildConfig
-import com.filaments.harrypottercharacterhub.characterList.common.ResourceStringProvider
-import com.filaments.harrypottercharacterhub.characterList.common.StringProvider
 import com.filaments.harrypottercharacterhub.characterList.data.local.database.AppDatabase
 import com.filaments.harrypottercharacterhub.characterList.data.remote.api.HarryPotterApiService
+import com.filaments.harrypottercharacterhub.characterList.utils.ResourceStringProvider
+import com.filaments.harrypottercharacterhub.characterList.utils.StringProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

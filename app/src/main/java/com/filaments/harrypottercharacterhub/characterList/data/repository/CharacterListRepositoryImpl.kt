@@ -1,14 +1,14 @@
 package com.filaments.harrypottercharacterhub.characterList.data.repository
 
 import coil.network.HttpException
-import com.filaments.harrypottercharacterhub.characterList.common.Resource
-import com.filaments.harrypottercharacterhub.characterList.common.StringProvider
 import com.filaments.harrypottercharacterhub.characterList.data.local.database.AppDatabase
 import com.filaments.harrypottercharacterhub.characterList.data.mappers.toCharacter
 import com.filaments.harrypottercharacterhub.characterList.data.mappers.toCharacterEntity
 import com.filaments.harrypottercharacterhub.characterList.data.remote.api.HarryPotterApiService
 import com.filaments.harrypottercharacterhub.characterList.domain.model.Character
 import com.filaments.harrypottercharacterhub.characterList.domain.repository.CharacterListRepository
+import com.filaments.harrypottercharacterhub.characterList.utils.Resource
+import com.filaments.harrypottercharacterhub.characterList.utils.StringProvider
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okio.IOException

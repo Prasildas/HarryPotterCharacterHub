@@ -1,4 +1,4 @@
-package com.filaments.harrypottercharacterhub.characterList.presentation.ui
+package com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.screens
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
@@ -15,8 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.filaments.harrypottercharacterhub.R
-import com.filaments.harrypottercharacterhub.characterList.presentation.CharacterListViewModel
-import com.filaments.harrypottercharacterhub.characterList.presentation.SearchableCharacterList
+import com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.viewmodel.CharacterListViewModel
 
 /**
  * Created by prasildas

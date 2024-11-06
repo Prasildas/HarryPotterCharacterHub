@@ -1,4 +1,4 @@
-package com.filaments.harrypottercharacterhub.characterList.common
+package com.filaments.harrypottercharacterhub.characterList.utils
 
 import androidx.compose.ui.graphics.Color
 import com.filaments.harrypottercharacterhub.characterList.presentation.ui.theme.DefaultHouseColor
