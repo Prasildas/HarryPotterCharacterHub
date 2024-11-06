@@ -17,5 +17,4 @@ interface CharacterDao {
     @Query("SELECT * FROM characters")
     suspend fun getAllCharacters(): List<CharacterEntity>
 
-
 }

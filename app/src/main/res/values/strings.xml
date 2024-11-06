@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">HarryPotterCharacterHub</string>
+
+
+    <string name="unknown_error">An unknown error occurred</string>
+    <string name="network_error">Network error, please check your connection.</string>
+    <string name="server_error">Server error, please try again later.</string>
+
+    <string name="unknown_actor">Unknown</string>
+    <string name="house_label">House</string>
+    <string name="gryffindor">Gryffindor</string>
+    <string name="slytherin">Slytherin</string>
+    <string name="ravenclaw">Ravenclaw</string>
+    <string name="hufflepuff">Hufflepuff</string>
+    <string name="played_by">Played by</string>
+
+    <string name="search_label">Search by name or actor</string>
+    <string name="no_characters_found">No characters found.</string>
+
+
+    <string name="unknown">Unknown</string>
+    <string name="alive">Alive</string>
+    <string name="deceased">Deceased</string>
+    <string name="actor_label">Actor</string>
+    <string name="species_label">Species</string>
+    <string name="date_of_birth_label">Date of Birth</string>
+    <string name="status_label">Status</string>
+    <string name="character_image_description">%1$s\'s picture</string>
+    <string name="image_load_error">Failed to load image</string>
+
+    <string name="character_not_found">Character not found.</string>
+
 </resources>

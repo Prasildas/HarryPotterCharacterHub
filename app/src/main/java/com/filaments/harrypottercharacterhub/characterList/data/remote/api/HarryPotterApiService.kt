@@ -7,8 +7,4 @@ interface HarryPotterApiService {
 
     @GET("characters")
     suspend fun getCharacters(): List<CharacterDto>
-
-    companion object {
-        const val BASE_URL = "https://hp-api.onrender.com/api/"
-    }
 }

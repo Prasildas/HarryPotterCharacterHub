@@ -7,6 +7,8 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Created by prasildas
  */
-interface CharacterRepository {
-    suspend fun getCharacters(): Flow<Resource<List<Character>>>
+interface CharacterListRepository {
+    suspend fun getCharacterList(
+        forceFetchRemote: Boolean
+    ): Flow<Resource<List<Character>>>
 }

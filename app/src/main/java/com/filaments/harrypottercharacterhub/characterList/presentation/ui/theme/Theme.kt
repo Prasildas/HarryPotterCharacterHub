@@ -1,4 +1,4 @@
-package com.filaments.harrypottercharacterhub.ui.theme
+package com.filaments.harrypottercharacterhub.characterList.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

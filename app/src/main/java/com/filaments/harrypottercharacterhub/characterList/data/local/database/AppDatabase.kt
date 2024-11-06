@@ -11,7 +11,8 @@ import com.filaments.harrypottercharacterhub.characterList.data.local.entities.C
 
 @Database(
     entities = [CharacterEntity::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract val characterDao: CharacterDao
