@@ -137,7 +137,6 @@ class CharacterListRepositoryImplTest {
     @Test
     fun `when local data is available but differs from remote data, update database and emit new data`() =
         runTest {
-            // Arrange
             val localCharacters = listOf(
                 CharacterEntity(
                     id = "1",

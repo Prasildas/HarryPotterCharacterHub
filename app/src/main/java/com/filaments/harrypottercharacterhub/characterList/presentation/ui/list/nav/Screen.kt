@@ -9,3 +9,4 @@ sealed class Screen(val route: String) {
         fun createRoute(characterId: String) = "character_detail/$characterId"
     }
 }
+

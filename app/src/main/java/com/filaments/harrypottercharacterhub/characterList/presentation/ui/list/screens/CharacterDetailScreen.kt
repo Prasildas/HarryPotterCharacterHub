@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -39,12 +40,16 @@ import com.filaments.harrypottercharacterhub.characterList.utils.DateUtils
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CharacterDetailScreen(character: Character, viewModel: CharacterListViewModel) {
+fun CharacterDetailScreen(
+    characterId: String,
+    viewModel: CharacterListViewModel = hiltViewModel()
+) {
     val context = LocalContext.current
 
-    // Observe the toast message state
-    val toastMessage by viewModel.toastMessage.collectAsStateWithLifecycle()
+    val characterListState by viewModel.characterListState.collectAsStateWithLifecycle()
+    val character = characterListState.characterList.find { it.id == characterId }
 
+    val toastMessage by viewModel.toastMessage.collectAsStateWithLifecycle()
     toastMessage?.let {
         Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         viewModel.clearToastMessage()
@@ -52,19 +57,23 @@ fun CharacterDetailScreen(character: Character, viewModel: CharacterListViewMode
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(title = { Text(character.name) })
+            CenterAlignedTopAppBar(title = { Text(character?.name ?: "Character Not Found") })
         },
         content = { paddingValues ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                CharacterImage(character.image, character.name, viewModel)
-                Spacer(modifier = Modifier.height(16.dp))
-                CharacterDetails(character)
+            if (character != null) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues)
+                        .padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    CharacterImage(character.image, character.name, viewModel)
+                    Spacer(modifier = Modifier.height(16.dp))
+                    CharacterDetails(character)
+                }
+            } else {
+                Text(text = stringResource(id = R.string.character_not_found))
             }
         }
     )
@@ -116,9 +125,7 @@ fun CharacterImage(imageUrl: String?, characterName: String, viewModel: Characte
 fun CharacterDetails(character: Character) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
-            text = "${stringResource(id = R.string.actor_label)}: ${
-                character.actor
-            }",
+            text = "${stringResource(id = R.string.actor_label)}: ${character.actor}",
             style = MaterialTheme.typography.bodyMedium
         )
         Text(
