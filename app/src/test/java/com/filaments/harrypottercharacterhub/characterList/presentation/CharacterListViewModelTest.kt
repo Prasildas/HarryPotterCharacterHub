@@ -5,8 +5,8 @@ import com.filaments.harrypottercharacterhub.characterList.data.mappers.toCharac
 import com.filaments.harrypottercharacterhub.characterList.data.remote.model.CharacterDto
 import com.filaments.harrypottercharacterhub.characterList.domain.model.Character
 import com.filaments.harrypottercharacterhub.characterList.domain.repository.CharacterListRepository
-import com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.state.CharacterListState
-import com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.viewmodel.CharacterListViewModel
+import com.filaments.harrypottercharacterhub.characterList.presentation.ui.state.CharacterListState
+import com.filaments.harrypottercharacterhub.characterList.presentation.ui.viewmodel.CharacterListViewModel
 import com.filaments.harrypottercharacterhub.characterList.utils.Resource
 import com.filaments.harrypottercharacterhub.characterList.utils.StringProvider
 import io.mockk.coEvery

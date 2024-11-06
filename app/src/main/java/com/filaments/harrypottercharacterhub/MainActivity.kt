@@ -17,9 +17,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.nav.Screen
-import com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.screens.CharacterDetailScreen
-import com.filaments.harrypottercharacterhub.characterList.presentation.ui.list.screens.CharacterListScreen
+import com.filaments.harrypottercharacterhub.characterList.presentation.ui.nav.Screen
+import com.filaments.harrypottercharacterhub.characterList.presentation.ui.screens.CharacterDetailScreen
+import com.filaments.harrypottercharacterhub.characterList.presentation.ui.screens.CharacterListScreen
 import com.filaments.harrypottercharacterhub.characterList.presentation.ui.theme.HarryPotterCharacterHubTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
