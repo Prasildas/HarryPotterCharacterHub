@@ -118,9 +118,7 @@ fun CharacterDetails(character: Character) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = "${stringResource(id = R.string.actor_label)}: ${
-                character.actor ?: stringResource(
-                    id = R.string.unknown_actor
-                )
+                character.actor
             }",
             style = MaterialTheme.typography.bodyMedium
         )
