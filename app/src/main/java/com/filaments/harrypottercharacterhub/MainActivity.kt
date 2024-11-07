@@ -17,10 +17,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.filaments.harrypottercharacterhub.characterList.presentation.ui.nav.Screen
-import com.filaments.harrypottercharacterhub.characterList.presentation.ui.screens.CharacterDetailScreen
-import com.filaments.harrypottercharacterhub.characterList.presentation.ui.screens.CharacterListScreen
-import com.filaments.harrypottercharacterhub.characterList.presentation.ui.theme.HarryPotterCharacterHubTheme
+import com.filaments.harrypottercharacterhub.character.presentation.nav.CharactersScreen
+import com.filaments.harrypottercharacterhub.character.presentation.ui.CharacterDetailScreen
+import com.filaments.harrypottercharacterhub.character.presentation.ui.CharacterListScreen
+import com.filaments.harrypottercharacterhub.core.theme.HarryPotterCharacterHubTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,14 +46,14 @@ class MainActivity : ComponentActivity() {
     fun AppNavigation() {
         val navController = rememberNavController()
 
-        NavHost(navController = navController, startDestination = Screen.Home.route) {
-            composable(Screen.Home.route) {
+        NavHost(navController = navController, startDestination = CharactersScreen.Home.route) {
+            composable(CharactersScreen.Home.route) {
                 CharacterListScreen(onCharacterClick = { characterId ->
-                    navController.navigate(Screen.Details.createRoute(characterId))
+                    navController.navigate(CharactersScreen.Details.createRoute(characterId))
                 })
             }
             composable(
-                route = Screen.Details.route,
+                route = CharactersScreen.Details.route,
                 arguments = listOf(navArgument("characterId") { type = NavType.StringType })
             ) { backStackEntry ->
                 val characterId = backStackEntry.arguments?.getString("characterId")
