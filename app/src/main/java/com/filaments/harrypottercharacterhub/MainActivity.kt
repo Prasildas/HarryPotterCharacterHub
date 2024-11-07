@@ -6,19 +6,15 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
-import com.filaments.harrypottercharacterhub.character.presentation.nav.CharacterNavigationHelper
-import com.filaments.harrypottercharacterhub.character.presentation.nav.CharactersScreen
+import androidx.navigation.toRoute
+import com.filaments.harrypottercharacterhub.character.presentation.nav.Route
 import com.filaments.harrypottercharacterhub.character.presentation.ui.CharacterDetailScreen
 import com.filaments.harrypottercharacterhub.character.presentation.ui.CharacterListScreen
 import com.filaments.harrypottercharacterhub.core.theme.HarryPotterCharacterHubTheme
@@ -47,27 +43,19 @@ class MainActivity : ComponentActivity() {
     fun AppNavigation() {
         val navController = rememberNavController()
 
-        NavHost(navController = navController, startDestination = CharactersScreen.Home.route) {
-            composable(CharactersScreen.Home.route) {
-                CharacterListScreen(onCharacterClick = { character ->
-                    val jsonCharacter = CharacterNavigationHelper.encodeCharacter(character)
-                    navController.navigate(CharactersScreen.Details.createRoute(jsonCharacter))
+        NavHost(navController = navController, startDestination = Route.List) {
+            composable<Route.List> {
+                CharacterListScreen(onCharacterClick = { characterId ->
+                    navController.navigate(Route.Details(characterID = characterId))
                 })
             }
-            composable(
-                route = CharactersScreen.Details.route,
-                arguments = listOf(navArgument("characterJson") { type = NavType.StringType })
-            ) { backStackEntry ->
-                val characterJson = backStackEntry.arguments?.getString("characterJson")
-                val character = CharacterNavigationHelper.decodeCharacter(characterJson)
-                if (character != null) {
-                    CharacterDetailScreen(character = character)
-                } else {
-                    Text(text = stringResource(id = R.string.character_not_found))
-                }
+            composable<Route.Details> { backStackEntry ->
+                val args = backStackEntry.toRoute<Route.Details>()
+                CharacterDetailScreen(characterId = args.characterID)
             }
         }
     }
+
 
     @Composable
     private fun SetBarColor(color: Color) {
