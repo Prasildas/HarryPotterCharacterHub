@@ -131,7 +131,8 @@ fun CharacterDetails(character: Character) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = "${stringResource(id = R.string.actor_label)}: ${character.actor}",
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center
         )
         Text(
             text = "${stringResource(id = R.string.species_label)}: ${
@@ -139,16 +140,19 @@ fun CharacterDetails(character: Character) {
                     id = R.string.unknown
                 )
             }",
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center
         )
-        Text(
-            text = "${stringResource(id = R.string.house_label)}: ${
-                character.house ?: stringResource(
-                    id = R.string.unknown
-                )
-            }",
-            style = MaterialTheme.typography.bodyMedium
-        )
+
+        character.house?.takeIf { it.isNotEmpty() }?.let {
+            Text(
+                text = "${stringResource(id = R.string.house_label)}: ${
+                    character.house
+                }",
+                style = MaterialTheme.typography.bodyMedium,
+                textAlign = TextAlign.Center
+            )
+        }
 
         character.dateOfBirth?.let {
             Text(
