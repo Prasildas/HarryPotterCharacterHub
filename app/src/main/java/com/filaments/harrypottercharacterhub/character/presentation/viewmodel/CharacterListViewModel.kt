@@ -78,10 +78,6 @@ class CharacterListViewModel @Inject constructor(
         getCharacterList(forceFetchFromRemote = true)
     }
 
-    fun showToast(message: String) {
-        _toastMessage.value = message
-    }
-
     fun clearToastMessage() {
         _toastMessage.value = null
     }
