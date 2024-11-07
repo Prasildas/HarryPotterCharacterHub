@@ -17,7 +17,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -27,13 +26,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.filaments.harrypottercharacterhub.R
 import com.filaments.harrypottercharacterhub.character.domain.model.Character
-import com.filaments.harrypottercharacterhub.character.presentation.viewmodel.CharacterListViewModel
 import com.filaments.harrypottercharacterhub.utils.DateUtils
 
 /**
@@ -42,32 +38,30 @@ import com.filaments.harrypottercharacterhub.utils.DateUtils
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CharacterDetailScreen(
-    characterId: String,
-    viewModel: CharacterListViewModel = hiltViewModel()
+    character: Character
 ) {
-    val characterListState by viewModel.characterListState.collectAsStateWithLifecycle()
-    val character = characterListState.characterList.find { it.id == characterId }
 
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(title = {
                 Text(
-                    character?.name ?: stringResource(id = R.string.character_not_found)
+                    character.name
                 )
             })
         },
         content = { paddingValues ->
-            if (character != null) {
-                CharacterDetailContent(character, paddingValues)
-
-            } else {
-                Text(
-                    text = stringResource(id = R.string.character_not_found),
-                    modifier = Modifier.padding(16.dp),
-                    style = MaterialTheme.typography.bodyMedium,
-                    textAlign = TextAlign.Center
-                )
-            }
+            CharacterDetailContent(character, paddingValues)
+//            if (character != null) {
+//
+//
+//            } else {
+//                Text(
+//                    text = stringResource(id = R.string.character_not_found),
+//                    modifier = Modifier.padding(16.dp),
+//                    style = MaterialTheme.typography.bodyMedium,
+//                    textAlign = TextAlign.Center
+//                )
+//            }
         }
     )
 }

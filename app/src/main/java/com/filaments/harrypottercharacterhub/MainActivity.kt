@@ -17,6 +17,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.filaments.harrypottercharacterhub.character.presentation.nav.CharacterNavigationHelper
 import com.filaments.harrypottercharacterhub.character.presentation.nav.CharactersScreen
 import com.filaments.harrypottercharacterhub.character.presentation.ui.CharacterDetailScreen
 import com.filaments.harrypottercharacterhub.character.presentation.ui.CharacterListScreen
@@ -48,24 +49,25 @@ class MainActivity : ComponentActivity() {
 
         NavHost(navController = navController, startDestination = CharactersScreen.Home.route) {
             composable(CharactersScreen.Home.route) {
-                CharacterListScreen(onCharacterClick = { characterId ->
-                    navController.navigate(CharactersScreen.Details.createRoute(characterId))
+                CharacterListScreen(onCharacterClick = { character ->
+                    val jsonCharacter = CharacterNavigationHelper.encodeCharacter(character)
+                    navController.navigate(CharactersScreen.Details.createRoute(jsonCharacter))
                 })
             }
             composable(
                 route = CharactersScreen.Details.route,
-                arguments = listOf(navArgument("characterId") { type = NavType.StringType })
+                arguments = listOf(navArgument("characterJson") { type = NavType.StringType })
             ) { backStackEntry ->
-                val characterId = backStackEntry.arguments?.getString("characterId")
-                if (characterId != null) {
-                    CharacterDetailScreen(characterId = characterId)
+                val characterJson = backStackEntry.arguments?.getString("characterJson")
+                val character = CharacterNavigationHelper.decodeCharacter(characterJson)
+                if (character != null) {
+                    CharacterDetailScreen(character = character)
                 } else {
                     Text(text = stringResource(id = R.string.character_not_found))
                 }
             }
         }
     }
-
 
     @Composable
     private fun SetBarColor(color: Color) {
