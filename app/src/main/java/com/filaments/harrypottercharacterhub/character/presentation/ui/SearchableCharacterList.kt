@@ -24,7 +24,7 @@ import com.filaments.harrypottercharacterhub.character.domain.model.Character
 @Composable
 fun SearchableCharacterList(
     characters: List<Character>,
-    onCharacterClick: (Character) -> Unit
+    onCharacterClick: (String) -> Unit
 ) {
     var searchText by remember { mutableStateOf("") }
 
@@ -46,11 +46,12 @@ fun SearchableCharacterList(
                 .padding(8.dp)
         )
 
+        // LazyColumn for displaying filtered characters
         LazyColumn {
             items(filteredCharacters) { character ->
                 CharacterRow(
                     character = character,
-                    onClick = { onCharacterClick(character) }
+                    onClick = { onCharacterClick(character.id) } // Use ID instead of name
                 )
             }
         }

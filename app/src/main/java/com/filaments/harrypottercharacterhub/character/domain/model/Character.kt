@@ -1,7 +1,5 @@
 package com.filaments.harrypottercharacterhub.character.domain.model
 
-import java.io.Serializable
-
 /**
  * Created by prasildas
  */
@@ -14,4 +12,4 @@ data class Character(
     val image: String?,
     val name: String,
     val species: String?
-): Serializable
+)

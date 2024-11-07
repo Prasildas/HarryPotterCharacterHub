@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.filaments.harrypottercharacterhub.R
-import com.filaments.harrypottercharacterhub.character.domain.model.Character
 import com.filaments.harrypottercharacterhub.character.presentation.viewmodel.CharacterListViewModel
 
 /**
@@ -33,7 +32,7 @@ import com.filaments.harrypottercharacterhub.character.presentation.viewmodel.Ch
 @Composable
 fun CharacterListScreen(
     viewModel: CharacterListViewModel = hiltViewModel(),
-    onCharacterClick: (Character) -> Unit
+    onCharacterClick: (String) -> Unit
 ) {
     val characterState by viewModel.characterListState.collectAsStateWithLifecycle()
 
@@ -105,4 +104,3 @@ fun RetryIcon(onRetry: () -> Unit) {
         )
     }
 }
-
